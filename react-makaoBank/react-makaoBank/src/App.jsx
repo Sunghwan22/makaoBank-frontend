@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { useEffect, useState } from 'react';
 
+import { useLocalStorage } from 'usehooks-ts';
 import Header from './components/Header';
 import AccountPage from './pages/AccountPage';
 
@@ -24,17 +25,13 @@ const Main = styled.main`
 `;
 
 export default function App() {
-  const [theme, setTheme] = useState(defaultTheme);
-
-  useEffect(() => {
-    setTheme(localStorage.getItem('theme') === 'dark' ? darkTheme : defaultTheme);
-  }, []);
+  const [themeName, setThemeName] = useLocalStorage('theme', 'default');
 
   const toggleTheme = () => {
-    const newTheme = theme === defaultTheme ? darkTheme : defaultTheme;
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme === defaultTheme ? 'default' : 'dark');
+    setThemeName(themeName === 'default' ? 'dark' : 'default');
   };
+
+  const theme = themeName === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <ThemeProvider theme={theme}>
