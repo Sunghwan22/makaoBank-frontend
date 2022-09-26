@@ -42,8 +42,13 @@
         "process": "^0.11.10"
     },
     "dependencies": {
+        "@types/styled-components": "^5.1.26",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^6.4.1"
+        "react-router-dom": "^6.4.1",
+        "styled-components": "^5.3.5",
+        "styled-react": "^0.4.0",
+        "styled-reset": "^4.4.2",
+        "usehooks-ts": "^2.7.1"
     }
 }
