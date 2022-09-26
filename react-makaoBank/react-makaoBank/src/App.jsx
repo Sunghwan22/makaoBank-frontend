@@ -4,8 +4,6 @@ import { Reset } from 'styled-reset';
 
 import styled, { ThemeProvider } from 'styled-components';
 
-import { useEffect, useState } from 'react';
-
 import { useLocalStorage } from 'usehooks-ts';
 import Header from './components/Header';
 import AccountPage from './pages/AccountPage';

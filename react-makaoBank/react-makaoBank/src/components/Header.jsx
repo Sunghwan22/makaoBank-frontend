@@ -5,7 +5,6 @@ import ThemeButton from './ui/ThemeButton';
 const Container = styled.header`
     width: 100%;
     padding: 1em;
-    background: ${(props) => props.theme.colors.panel};
 
     nav {
         ul{
