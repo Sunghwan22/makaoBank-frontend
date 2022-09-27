@@ -14,6 +14,15 @@ export default class ApiService {
       amount: data.amount,
     };
   }
+
+  async fetchAccount() {
+    const url = `${baseUrl}/accounts/me`;
+    // Todo : access token을 header로 넘겨 줄 것
+    const { data } = await axios.get(url);
+    const { name, accountNumber, amount } = data;
+
+    return { name, accountNumber, amount };
+  }
 }
 
 export const apiService = new ApiService();

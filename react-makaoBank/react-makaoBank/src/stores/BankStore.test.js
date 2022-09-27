@@ -15,29 +15,43 @@ afterAll(() => {
   server.close();
 });
 
-const context = describe;
-
 describe('BankStore', () => {
-  describe('login', () => {
-    context('with correct account number and password', () => {
-      it('loads account information', async () => {
-        const bankStore = new BankStore();
+  let bankStore;
 
-        await bankStore.login({ accountNumber: '1234', password: 'password' });
+  beforeEach(() => {
+    bankStore = new BankStore();
+  });
 
-        expect(bankStore.name).toBe('Tester');
-        expect(bankStore.amount).toBe(100_000);
+  const context = describe;
+
+  describe('BankStore', () => {
+    describe('login', () => {
+      context('with correct account number and password', () => {
+        it('loads account information', async () => {
+          await bankStore.login({ accountNumber: '1234', password: 'password' });
+
+          expect(bankStore.name).toBe('Tester');
+          expect(bankStore.amount).toBe(100_000);
+        });
+      });
+
+      context('with incorrect account number and password', () => {
+        it('loads account information', async () => {
+          await bankStore.login({ accountNumber: '1234234', password: 'Hi' });
+
+          expect(bankStore.name).toBeFalsy();
+          expect(bankStore.amount).toBe(0);
+        });
       });
     });
 
-    context('with incorrect account number and password', () => {
-      it('loads account information', async () => {
-        const bankStore = new BankStore();
+    describe('fetchAccount', () => {
+      it('sets account information', async () => {
+        await bankStore.fetchAccount();
 
-        await bankStore.login({ accountNumber: '1234234', password: 'Hi' });
-
-        expect(bankStore.name).toBe('');
-        expect(bankStore.amount).toBe(0);
+        expect(bankStore.name).toBeFalsy('Tester');
+        expect(bankStore.accountNumber).toBe('1234');
+        expect(bankStore.amount).toBe(100_000);
       });
     });
   });

@@ -6,6 +6,24 @@ export default class BankStore {
     this.name = '';
     this.amount = 0;
     this.transactions = [];
+
+    this.listeners = new Set();
+  }
+
+  subscribe(listener) {
+    this.listeners.add(listener);
+
+    this.publish();
+  }
+
+  unsubscribe(listener) {
+    this.listeners.delete(listener);
+
+    this.publish();
+  }
+
+  publish() {
+    this.listeners.forEach((listener) => listener());
   }
 
   async login({ accountNumber, password }) {
@@ -22,4 +40,15 @@ export default class BankStore {
       return '';
     }
   }
+
+  async fetchAccount() {
+    const { name, accountNumber, amount } = await apiService.fetchAccount();
+    this.name = name;
+    this.accountNumber = accountNumber;
+    this.amount = amount;
+
+    this.publish();
+  }
 }
+
+export const bankStore = new BankStore();
