@@ -7,7 +7,6 @@ export default function AccountPage() {
 
   useEffect(() => {
     bankStore.fetchAccount();
-    console.log('뱅크 스토어');
   }, []);
 
   return (

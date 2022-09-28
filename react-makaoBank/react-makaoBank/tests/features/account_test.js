@@ -11,6 +11,7 @@ Scenario('잔액이 없는 경우', ({ I }) => {
   // given
   // Todo : 잔액을 0으로 설정
   I.changeAmount({ userId: 1, amount: 0 });
+
   I.amOnPage('/');
   // when
   I.click('잔액 확인');

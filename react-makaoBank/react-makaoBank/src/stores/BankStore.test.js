@@ -1,8 +1,6 @@
 import server from '../testServer';
 import BankStore from './BankStore';
 
-jest.mock('../services/ApiService');
-
 beforeAll(() => {
   server.listen();
 });
@@ -49,9 +47,33 @@ describe('BankStore', () => {
       it('sets account information', async () => {
         await bankStore.fetchAccount();
 
-        expect(bankStore.name).toBeFalsy('Tester');
+        expect(bankStore.name).toBe('Tester');
         expect(bankStore.accountNumber).toBe('1234');
         expect(bankStore.amount).toBe(100_000);
+      });
+    });
+
+    describe('fetchAccount', () => {
+      context('when request is sucessful', () => {
+        it('sets transferState to processing and sucess', async () => {
+          await bankStore.requestTransfer({
+            to: '1234',
+            amount: 100,
+            name: 'Test',
+          });
+
+          expect(bankStore.transferState).toBe('success');
+        });
+
+        it('sets transfer State to processing and fail', async () => {
+          await bankStore.requestTransfer({
+            to: '1234',
+            amount: -100,
+            name: 'Test',
+          });
+
+          expect(bankStore.errorMessage).toBeTruthy();
+        });
       });
     });
   });
