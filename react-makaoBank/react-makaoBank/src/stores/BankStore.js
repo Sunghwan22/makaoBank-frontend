@@ -5,8 +5,10 @@ export default class BankStore {
     this.accountNumber = '';
     this.name = '';
     this.amount = 0;
+
     this.transactions = [];
     this.transferState = '';
+
     this.errorMessage = '';
 
     this.listeners = new Set();
@@ -30,14 +32,14 @@ export default class BankStore {
 
   async login({ accountNumber, password }) {
     try {
-      const { accountToken, name, amount }
+      const { accessToken, name, amount }
       // eslint-disable-next-line operator-linebreak
       = await apiService.postSession({ accountNumber, password });
 
       this.name = name;
       this.amount = amount;
 
-      return accountToken;
+      return accessToken;
     } catch (e) {
       return '';
     }
@@ -72,6 +74,14 @@ export default class BankStore {
     this.errorMessage = errorMessage;
     this.transferState = state;
 
+    this.publish();
+  }
+
+  async fetchTransactions() {
+    this.transactions = [];
+    this.publish();
+
+    this.transactions = await apiService.fetchTransactions();
     this.publish();
   }
 

@@ -4,6 +4,8 @@ Before(({ I }) => {
   // GET / backdoor/setup-database
   I.setupDatabase();
 
+  I.login('1234');
+
   I.amOnPage('/');
 });
 // Todo: 잔액없는 경우 확인 필요함

@@ -6,7 +6,11 @@ Before(({ I }) => {
   I.setupDatabase();
   I.changeAmount({ userId: 1, amount });
 
-  I.amOnPage('/transfer');
+  I.amOnPage('/');
+
+  I.login('1234');
+
+  I.click('송금');
 });
 
 Scenario('올바르게 송금이 된 경우', ({ I }) => {
@@ -25,8 +29,6 @@ Scenario('올바르게 송금이 된 경우', ({ I }) => {
 });
 // todo 예외 상황 처리 필요함
 Scenario('잔액이 부족할 경우', ({ I }) => {
-  I.click('송금');
-
   I.fillField('받을 분 계좌 번호', '1234567890');
   I.fillField('보낼 금액', '30000000000');
   I.fillField('받는 분께 표시할 이름', '테스트');
@@ -36,8 +38,6 @@ Scenario('잔액이 부족할 경우', ({ I }) => {
 });
 
 Scenario('계좌 번호가 잘못된 경우 ', ({ I }) => {
-  I.click('송금');
-
   I.fillField('받을 분 계좌 번호', '00999999');
   I.fillField('보낼 금액', '30000000000');
   I.fillField('받는 분께 표시할 이름', '테스트');

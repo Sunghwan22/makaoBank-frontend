@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocalStorage } from 'usehooks-ts';
 import ThemeButton from './ui/ThemeButton';
 
 const Container = styled.header`
@@ -19,6 +20,15 @@ const Container = styled.header`
 `;
 
 export default function Header({ onClick }) {
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setAccessToken('');
+    navigate('/');
+  };
+
   return (
     <Container>
       <nav>
@@ -26,15 +36,24 @@ export default function Header({ onClick }) {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/account">잔액 확인</Link>
-          </li>
-          <li>
-            <Link to="/transfer">송금</Link>
-          </li>
-          <li>
-            <Link to="/transactions">거래 내역 확인</Link>
-          </li>
+          {accessToken ? (
+            <>
+              <li>
+                <Link to="/account">잔액 확인</Link>
+              </li>
+              <li>
+                <Link to="/transfer">송금</Link>
+              </li>
+              <li>
+                <Link to="/transactions">거래 내역 확인</Link>
+              </li>
+              <button type="button" onClick={handleLogout}>
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <Link to="/login">로그인</Link>
+          )}
         </ul>
         <ThemeButton type="button" onClick={onClick} />
       </nav>

@@ -7,7 +7,6 @@ export default function useRouteComponent() {
   const { pathName } = window.location;
 
   const components = {
-    '/': Homepage,
     '/account': AccountPage,
     '/transfer': TransferPage,
     '/transactions': TransactionsPage,

@@ -5,6 +5,7 @@ import { Reset } from 'styled-reset';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { useLocalStorage } from 'usehooks-ts';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import AccountPage from './pages/AccountPage';
 
@@ -17,6 +18,8 @@ import GlobalStyle from './styles/GlobalStyle';
 
 import darkTheme from './styles/darkTheme';
 import defaultTheme from './styles/lightTheme';
+import LoginPage from './pages/LoginPage';
+import { apiService } from './services/ApiService';
 
 const Main = styled.main`
   padding: 1em;
@@ -24,6 +27,12 @@ const Main = styled.main`
 
 export default function App() {
   const [themeName, setThemeName] = useLocalStorage('theme', 'default');
+  const [accessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    console.log(accessToken);
+    apiService.setAccessToken(accessToken);
+  }, [accessToken]);
 
   const toggleTheme = () => {
     setThemeName(themeName === 'default' ? 'dark' : 'default');
@@ -41,6 +50,7 @@ export default function App() {
       <Main>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/transfer" element={<TransferPage />} />
           <Route path="/transactions" element={<TransactionsPage />} />

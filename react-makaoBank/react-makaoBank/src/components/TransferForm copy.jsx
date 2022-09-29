@@ -31,7 +31,7 @@ export default function TransferForm() {
           type="number"
         />
         {errors.account ? (
-          <Errors>받으실 분 계좌 번호를 입력해 주세요</Errors>
+          <Error>받으실 분 계좌 번호를 입력해 주세요</Error>
         ) : null}
       </div>
       <div>
