@@ -41,7 +41,30 @@ export default class BankStore {
 
       return accessToken;
     } catch (e) {
+      const { message } = e.response.data;
+      this.errorMessage = message;
+
+      this.publish();
       return '';
+    }
+  }
+
+  async register({
+    name, accountNumber, password, confirmPassword,
+  }) {
+    if (password !== confirmPassword) {
+      this.errorMessage = '비밀번호가 일치하지 않습니다';
+    }
+    try {
+      const { userName, userAccountNumber } = await apiService.postUser({
+        name, accountNumber, password, confirmPassword,
+      });
+
+      this.name = userName;
+      this.accountNumber = userAccountNumber;
+    } catch (e) {
+      const { message } = e.response.data;
+      this.errorMessage = message;
     }
   }
 

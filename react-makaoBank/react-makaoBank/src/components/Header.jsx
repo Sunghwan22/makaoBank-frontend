@@ -34,7 +34,7 @@ export default function Header({ onClick }) {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">홈</Link>
           </li>
           {accessToken ? (
             <>
@@ -52,7 +52,14 @@ export default function Header({ onClick }) {
               </button>
             </>
           ) : (
-            <Link to="/login">로그인</Link>
+            <>
+              <li>
+                <Link to="/login">로그인</Link>
+              </li>
+              <li>
+                <Link to="/register">회원가입</Link>
+              </li>
+            </>
           )}
         </ul>
         <ThemeButton type="button" onClick={onClick} />

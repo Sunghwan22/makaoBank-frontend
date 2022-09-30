@@ -19,7 +19,9 @@ import GlobalStyle from './styles/GlobalStyle';
 import darkTheme from './styles/darkTheme';
 import defaultTheme from './styles/lightTheme';
 import LoginPage from './pages/LoginPage';
+
 import { apiService } from './services/ApiService';
+import SignUpPage from './pages/SingUpPage';
 
 const Main = styled.main`
   padding: 1em;
@@ -30,7 +32,6 @@ export default function App() {
   const [accessToken] = useLocalStorage('accessToken', '');
 
   useEffect(() => {
-    console.log(accessToken);
     apiService.setAccessToken(accessToken);
   }, [accessToken]);
 
@@ -51,6 +52,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/transfer" element={<TransferPage />} />
           <Route path="/transactions" element={<TransactionsPage />} />

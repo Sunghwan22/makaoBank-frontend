@@ -16,7 +16,7 @@ export default class ApiService {
   async postSession({ accountNumber, password }) {
     const url = `${baseUrl}/session`;
     const { data } = await axios.post(url, { accountNumber, password });
-    console.log(data);
+
     return {
       accessToken: data.accessToken,
       name: data.name,
@@ -55,6 +55,18 @@ export default class ApiService {
     });
     const { transactions } = data;
     return transactions;
+  }
+
+  async postUser({
+    name, accountNumber, password, confirmPassword,
+  }) {
+    const url = `${baseUrl}/accounts/user`;
+    const { data } = await axios.post(url, {
+      name, accountNumber, password, confirmPassword,
+    });
+
+    const { userName, userAccountNumber } = data;
+    return { userName, userAccountNumber };
   }
 }
 
