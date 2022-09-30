@@ -5,7 +5,7 @@ const ThemeButton = styled.button`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 1.5em;
+  padding: 1em;
   border: none;
   background-color: transparent;
   cursor: pointer;

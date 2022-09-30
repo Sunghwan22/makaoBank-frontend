@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import AccountAmount from '../components/AccountAmount';
-import TransferForm from '../components/TransferForm copy';
+import TransferForm from '../components/TransferForm';
 
 import useBankStore from '../hooks/useBankStore';
 
@@ -12,9 +11,6 @@ export default function TransferPage() {
   }, []);
 
   return (
-    <div>
-      <AccountAmount />
-      <TransferForm />
-    </div>
+    <TransferForm />
   );
 }

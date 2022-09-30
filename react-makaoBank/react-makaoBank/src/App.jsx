@@ -20,11 +20,15 @@ import darkTheme from './styles/darkTheme';
 import defaultTheme from './styles/lightTheme';
 import LoginPage from './pages/LoginPage';
 
-import { apiService } from './services/ApiService';
 import SignUpPage from './pages/SingUpPage';
+import { apiService } from './services/ApiService';
 
 const Main = styled.main`
+  width: 100%;
+  height: 100%;
   padding: 1em;
+  display: flex;
+  justify-content: center;
 `;
 
 export default function App() {
@@ -47,6 +51,7 @@ export default function App() {
       <GlobalStyle />
       <Header
         onClick={toggleTheme}
+        theme={theme}
       />
       <Main>
         <Routes>

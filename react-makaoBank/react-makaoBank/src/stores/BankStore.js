@@ -43,7 +43,6 @@ export default class BankStore {
     } catch (e) {
       const { message } = e.response.data;
       this.errorMessage = message;
-
       this.publish();
       return '';
     }
