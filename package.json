@@ -12,7 +12,8 @@
         "codeceptjs:demo": "codeceptjs run --steps -c node_modules/@codeceptjs/examples",
         "codeceptjs:demo:headless": "HEADLESS=true codeceptjs run --steps -c node_modules/@codeceptjs/examples",
         "codeceptjs:demo:ui": "codecept-ui --app  -c node_modules/@codeceptjs/examples",
-        "build": "parcel build index.html --public-url ./ && cp 404.html ./dist"
+        "build": "parcel build index.html --public-url ./ && cp 404.html ./dist",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx",
     },
     "keywords": [],
     "author": "",
