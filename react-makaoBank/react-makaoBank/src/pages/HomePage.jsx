@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { apiService } from '../services/ApiService';
+import Image from '../assets/mainImage.png';
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,16 @@ const TransactionButton = styled.button`
   border-radius: 3em;
 `;
 
+const ImageBox = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 60vh;
+  height: 50vh;
+  background: url(${Image}) no-repeat 0 50%; 
+  background-size: contain;
+`;
+
 export default function Homepage() {
   const navigate = useNavigate();
 
@@ -83,6 +94,7 @@ export default function Homepage() {
             거래 내역 조회
           </TransactionButton>
         </Buttons>
+        <ImageBox />
       </div>
     </Container>
   );

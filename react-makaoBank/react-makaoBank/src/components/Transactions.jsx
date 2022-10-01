@@ -93,7 +93,6 @@ export default function Transactions() {
         <tbody>
           {transactions.length === 0 ? (
             <List>
-              <th />
               <P>
                 거래 내역이 없습니다
               </P>
