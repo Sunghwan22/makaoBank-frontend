@@ -12,7 +12,6 @@ const accessToken = JSON.parse(data);
 apiService.setAccessToken(accessToken);
 
 root.render((
-  // 베이스 url 해야함
   <BrowserRouter basename="/makaoBank-frontend">
     <App />
   </BrowserRouter>
